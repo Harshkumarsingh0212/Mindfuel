@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,10 +9,13 @@
   <link rel="stylesheet" href="style.css" />
 
   <!-- React CDN -->
+
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
   <script src="script.js" defer></script>
+
 </head>
 <body>
 
@@ -21,34 +25,45 @@
   </header>
 
   <main>
-    <!-- Vanilla JS section -->
-    <section class="card">
-      <h2>Daily Check-In</h2>
 
-      <label>Focus (1–5)</label>
-      <div class="scale" id="focus"></div>
+```
+<!-- Daily Check-In -->
+<section class="card">
+  <h2>Daily Check-In</h2>
 
-      <label>Energy (1–5)</label>
-      <div class="scale" id="energy"></div>
+  <label>Focus (1–5)</label>
+  <div class="scale" id="focus"></div>
 
-      <label>Mood</label>
-      <div class="moods">
-        <button>😄</button>
-        <button>🙂</button>
-        <button>😐</button>
-        <button>😕</button>
-        <button>😞</button>
-      </div>
+  <label>Energy (1–5)</label>
+  <div class="scale" id="energy"></div>
 
-      <textarea id="reflection" placeholder="One line about today..."></textarea>
+  <label>Mood</label>
+  <div class="moods">
+    <button>😄</button>
+    <button>🙂</button>
+    <button>😐</button>
+    <button>😕</button>
+    <button>😞</button>
+  </div>
 
-      <button id="saveBtn">Save Today</button>
-      <p id="status"></p>
-    </section>
+  <textarea id="reflection" placeholder="One line about today..."></textarea>
 
-    <!-- React section -->
-    <section id="react-root"></section>
+  <button id="saveBtn">Save Today</button>
+  <p id="status"></p>
+</section>
+
+
+<section class="card">
+  <h2>History</h2>
+  <div id="history"></div>
+</section>
+
+<!-- React section -->
+<section id="react-root"></section>
+```
+
   </main>
 
 </body>
 </html>
+
