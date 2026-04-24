@@ -1,69 +1,202 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MindFuel</title>
+  <title>MindFuel 🌱</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-
-  <!-- React CDN -->
-
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-  <script src="script.js" defer></script>
-
 </head>
 <body>
 
-  <header>
-    <h1>MindFuel 🌱</h1>
-    <p>Track how your day actually felt</p>
-  </header>
+  <!-- ============ AUTH SCREEN ============ -->
+  <div id="auth-screen" class="screen active">
+    <div class="auth-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+    <div class="auth-container">
+      <div class="auth-brand">
+        <span class="brand-icon">🌱</span>
+        <h1 class="brand-name">MindFuel</h1>
+        <p class="brand-tagline">Your mental energy, mapped.</p>
+      </div>
 
-  <main>
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Sign In</button>
+          <button class="auth-tab" data-tab="signup">Create Account</button>
+        </div>
 
-```
-<!-- Daily Check-In -->
-<section class="card">
-  <h2>Daily Check-In</h2>
+        <!-- Login Form -->
+        <div class="auth-form active" id="login-form">
+          <div class="field-group">
+            <label>Username</label>
+            <input type="text" id="login-username" placeholder="your username" autocomplete="username" />
+          </div>
+          <div class="field-group">
+            <label>Password</label>
+            <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+          <p class="auth-error" id="login-error"></p>
+          <button class="btn-primary" id="loginBtn">Sign In →</button>
+        </div>
 
-  <label>Focus (1–5)</label>
-  <div class="scale" id="focus"></div>
-
-  <label>Energy (1–5)</label>
-  <div class="scale" id="energy"></div>
-
-  <label>Mood</label>
-  <div class="moods">
-    <button>😄</button>
-    <button>🙂</button>
-    <button>😐</button>
-    <button>😕</button>
-    <button>😞</button>
+        <!-- Signup Form -->
+        <div class="auth-form" id="signup-form">
+          <div class="field-group">
+            <label>Your Name</label>
+            <input type="text" id="signup-name" placeholder="what should we call you?" />
+          </div>
+          <div class="field-group">
+            <label>Username</label>
+            <input type="text" id="signup-username" placeholder="pick a username" autocomplete="username" />
+          </div>
+          <div class="field-group">
+            <label>Password</label>
+            <input type="password" id="signup-password" placeholder="min 6 characters" autocomplete="new-password" />
+          </div>
+          <p class="auth-error" id="signup-error"></p>
+          <button class="btn-primary" id="signupBtn">Create Account →</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <textarea id="reflection" placeholder="One line about today..."></textarea>
+  <!-- ============ APP SCREEN ============ -->
+  <div id="app-screen" class="screen">
 
-  <button id="saveBtn">Save Today</button>
-  <p id="status"></p>
-</section>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <span>🌱</span> MindFuel
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-view="checkin">
+          <span class="nav-icon">✦</span> Check-In
+        </a>
+        <a href="#" class="nav-item" data-view="history">
+          <span class="nav-icon">◈</span> History
+        </a>
+        <a href="#" class="nav-item" data-view="insights">
+          <span class="nav-icon">◉</span> Insights
+        </a>
+        <a href="#" class="nav-item" data-view="predict">
+          <span class="nav-icon">⬡</span> Predict
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar" id="user-avatar">?</div>
+          <div>
+            <div class="user-name" id="user-display-name">—</div>
+            <div class="user-handle" id="user-display-handle">@—</div>
+          </div>
+        </div>
+        <button class="logout-btn" id="logoutBtn">Sign out</button>
+      </div>
+    </aside>
 
+    <!-- Mobile top bar -->
+    <div class="mobile-topbar">
+      <button class="hamburger" id="hamburger">☰</button>
+      <span class="mobile-brand">🌱 MindFuel</span>
+      <div class="mobile-avatar" id="mobile-avatar">?</div>
+    </div>
 
-<section class="card">
-  <h2>History</h2>
-  <div id="history"></div>
-</section>
+    <!-- Main content -->
+    <main class="app-main">
 
-<!-- React section -->
-<section id="react-root"></section>
-```
+      <!-- CHECK-IN VIEW -->
+      <div class="view active" id="view-checkin">
+        <div class="view-header">
+          <div>
+            <h2 class="view-title">Daily Check-In</h2>
+            <p class="view-sub" id="today-date">—</p>
+          </div>
+          <div class="streak-badge" id="streak-badge">
+            <span id="streak-num">0</span>
+            <span class="streak-label">day streak 🔥</span>
+          </div>
+        </div>
 
-  </main>
+        <div class="card checkin-card">
+          <div class="checkin-row">
+            <div class="checkin-block">
+              <label class="checkin-label">Focus</label>
+              <p class="checkin-hint">How sharp was your mind?</p>
+              <div class="scale-group" id="focus-scale"></div>
+            </div>
+            <div class="checkin-block">
+              <label class="checkin-label">Energy</label>
+              <p class="checkin-hint">How fuelled did you feel?</p>
+              <div class="scale-group" id="energy-scale"></div>
+            </div>
+          </div>
 
+          <div class="mood-section">
+            <label class="checkin-label">Mood</label>
+            <div class="moods" id="mood-buttons">
+              <button class="mood-btn" data-mood="😄" title="Great">😄</button>
+              <button class="mood-btn" data-mood="🙂" title="Good">🙂</button>
+              <button class="mood-btn" data-mood="😐" title="Okay">😐</button>
+              <button class="mood-btn" data-mood="😕" title="Low">😕</button>
+              <button class="mood-btn" data-mood="😞" title="Rough">😞</button>
+            </div>
+          </div>
+
+          <div class="reflection-section">
+            <label class="checkin-label">Reflection</label>
+            <p class="checkin-hint">One honest sentence about today.</p>
+            <textarea id="reflection" placeholder="Today felt like…"></textarea>
+          </div>
+
+          <button class="btn-primary save-btn" id="saveBtn">Save Today ✦</button>
+          <p id="status"></p>
+        </div>
+      </div>
+
+      <!-- HISTORY VIEW -->
+      <div class="view" id="view-history">
+        <div class="view-header">
+          <div>
+            <h2 class="view-title">History</h2>
+            <p class="view-sub">Every entry tells a story.</p>
+          </div>
+          <button class="btn-ghost" id="clearHistoryBtn">Clear all</button>
+        </div>
+        <div id="history-list"></div>
+      </div>
+
+      <!-- INSIGHTS VIEW -->
+      <div class="view" id="view-insights">
+        <div class="view-header">
+          <div>
+            <h2 class="view-title">Insights</h2>
+            <p class="view-sub">Patterns in your mental energy.</p>
+          </div>
+        </div>
+        <div id="insights-content"></div>
+      </div>
+
+      <!-- PREDICT VIEW -->
+      <div class="view" id="view-predict">
+        <div class="view-header">
+          <div>
+            <h2 class="view-title">Predict</h2>
+            <p class="view-sub">What does tomorrow look like?</p>
+          </div>
+        </div>
+        <div id="predict-content"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
 
